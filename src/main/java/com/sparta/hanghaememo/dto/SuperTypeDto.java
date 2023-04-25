@@ -1,4 +1,4 @@
 package com.sparta.hanghaememo.dto;
 
-public interface InterfaceDto {
+public interface SuperTypeDto {
 }
