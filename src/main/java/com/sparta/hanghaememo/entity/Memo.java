@@ -11,33 +11,25 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 public class Memo extends Timestamped {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id //JPA가 User Memo에 관련된 쿼리를 작성할때 이 필드를 이용하게 함, PK
+    @GeneratedValue(strategy = GenerationType.AUTO) //자동 생성 전략을 지정하는 어노테이션, Auto로 설정했기 때문에 전략 중 하나를 자동으로 선택함
     private Long id;
 
-//    @Column(nullable = false) //이게 받는 값
-//    private String username;
-
-    @Column(nullable = false) //이게 받는 값
+    @Column(nullable = false) //null 불가
     private String contents;
 
-    @Column(nullable = false) //이게 받는 값
+    @Column(nullable = false) //null 불가
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY) //이게 받는 값
-    @JoinColumn(name = "username")
+    @ManyToOne(fetch = FetchType.LAZY) //다대일 연관관계, 지연로딩 이용
+    @JoinColumn(name = "username") //Memo 테이블에 username이라는 컬럼명 정의
     private User user;
 
-    //MemoService에서 memoCreate 메서드가 requestDto를 인자로 전달하면
-    // 해당 매개변수를 이용해 memo를 초기화 한다.
     public Memo(MemoRequestDto requestDto) {
-//        this.username = requestDto.getUsername();
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
     }
 
-    //MemoService.updateMemo 메서드를 사용할 때 인자로 전달되는 requestDto를
-    //받아 메모를 수정하기 위한 메서드
     public void update(MemoRequestDto requestDto) {
 //        this.username = requestDto.getUsername();
         this.contents = requestDto.getContents();
