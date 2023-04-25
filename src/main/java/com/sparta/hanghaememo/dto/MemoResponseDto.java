@@ -4,7 +4,7 @@ import com.sparta.hanghaememo.entity.Memo;
 import lombok.Getter;
 
 @Getter
-public class MemoResponseDto implements InterfaceDto {
+public class MemoResponseDto implements SuperTypeDto {
 
     private String createdAt;
     private String modifiedAt;
